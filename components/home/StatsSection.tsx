@@ -4,30 +4,33 @@ import { CheckCircle2 } from "lucide-react";
 
 export default function StatsSection() {
   const stats = [
-    { label: "Customer Satisfaction", value: "98%" },
-    { label: "Years Experience", value: "15+" },
-    { label: "Designer Collection", value: "200+" },
-    { label: "Accuracy Rate", value: "99.9%" },
+    { label: "Patient Satisfaction", value: "98%" },
+    { label: "Clinical Excellence", value: "15+ Years" },
+    { label: "Luxury Collection", value: "200+ Brands" },
+    { label: "Lense Accuracy", value: "99.9%" },
   ];
 
   return (
-    <section className="bg-[#0B1C2D] py-16">
-      <div className="container max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 items-center">
+    <section className="bg-[#0B1C2D] py-16 md:py-20 relative overflow-hidden">
+      {/* Aesthetic Background Elements */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[300px] bg-[#0D9488]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      
+      <div className="container max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-x-20 items-center">
           {stats.map((stat, i) => (
             <div
               key={i}
-              className="flex items-center gap-4 group"
-              style={{ animation: `fade-up 0.8s ease-out ${i * 0.1}s both` }}
+              className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6 group"
             >
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-[#0D9488] shrink-0 group-hover:bg-[#0D9488] group-hover:text-white group-hover:border-[#0D9488] transition-all duration-500">
-                <CheckCircle2 className="size-6" />
+              <div className="size-16 rounded-[1.25rem] bg-white/5 border border-white/10 flex items-center justify-center text-[#0D9488] shrink-0 group-hover:bg-[#0D9488] group-hover:text-white group-hover:border-[#0D9488] group-hover:rotate-12 transition-all duration-700 shadow-2xl">
+                <CheckCircle2 className="size-8" />
               </div>
-              <div>
-                <div className="text-3xl font-[var(--font-montserrat)] font-black text-white leading-none mb-1">
+              <div className="flex flex-col justify-center">
+                <div className="text-3xl md:text-4xl font-montserrat font-black text-white leading-none mb-3 tracking-tighter">
                   {stat.value}
                 </div>
-                <div className="text-[10px] uppercase font-bold tracking-widest text-white/50">
+                <div className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#0D9488] font-black">
                   {stat.label}
                 </div>
               </div>

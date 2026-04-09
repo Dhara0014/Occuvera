@@ -23,6 +23,14 @@ export const metadata = {
     "Expert eye care at Occuvera. Experience precision vision testing, personalized prescriptions, and premium designer eyewear. Book your comprehensive eye exam today.",
   keywords:
     "eye care, eye test, optical store, designer eyewear, glasses, contact lenses, optometrist, prescription glasses, Ahmedabad",
+    icons: {
+    icon: [
+      // { url: "/icon0.svg", type: "image/svg+xml" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: ["/icon0.svg"],
+    apple: ["/icon0.svg"], // works but PNG is better for Apple (optional upgrade later)
+  },
   openGraph: {
     title: "Occuvera | Premium Eye Care & Designer Eyewear",
     description:
@@ -44,7 +52,7 @@ export default function RootLayout({
         <Header />
         {/* pt accounts for fixed header: topbar (38px) + nav (~76px) = ~114px.
             On mobile the topbar is hidden so only the nav height applies. */}
-        <main className="pt-[76px] md:pt-[114px]">{children}</main>
+        <main className="pt-[72px] md:pt-[108px]">{children}</main>
         <Footer />
       </body>
     </html>

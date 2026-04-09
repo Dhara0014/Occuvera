@@ -5,11 +5,11 @@ import { FaInstagram, FaFacebookF, FaXTwitter, FaYoutube } from "react-icons/fa6
 
 const footerLinks = {
   Services: [
-    { label: "Eye Examinations", href: "#services" },
-    { label: "Designer Frames", href: "#collection" },
-    { label: "Contact Lenses", href: "#services" },
-    { label: "Lens Replacement", href: "#services" },
-    { label: "Kids Eye Care", href: "#services" },
+    { label: "Eye Examinations", href: "/services" },
+    { label: "Designer Frames", href: "/products" },
+    { label: "Contact Lenses", href: "/services" },
+    { label: "Lens Replacement", href: "/services" },
+    { label: "Kids Eye Care", href: "/services" },
   ],
   Company: [
     { label: "About Occuvera", href: "/about" },
@@ -19,8 +19,9 @@ const footerLinks = {
     { label: "Press", href: "/press" },
   ],
   Support: [
-    { label: "Book Appointment", href: "#" },
-    { label: "FAQs", href: "#faq" },
+    { label: "Book Appointment", href: "#book-appointment" },
+    { label: "FAQs", href: "/faqs" },
+    { label: "Testimonials", href: "/testimonials" },
     { label: "Insurance & Claims", href: "/insurance" },
     { label: "Warranty Policy", href: "/warranty" },
     { label: "Contact Us", href: "/contact" },
@@ -72,7 +73,7 @@ export default function Footer() {
               </div>
             </Link>
 
-            <p className="text-[#A9B0B8] text-sm leading-relaxed max-w-xs font-[var(--font-inter)] opacity-80">
+            <p className="text-[#A9B0B8] text-sm leading-relaxed max-w-xs font-inter opacity-80">
               Occuvera is your trusted destination for expert eye care, precision
               vision testing, and premium designer eyewear. Serving India since 2010.
             </p>

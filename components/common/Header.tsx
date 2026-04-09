@@ -1,23 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X, Phone, Clock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import BookingModal from "@/components/common/BookingModal";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "#services" },
-  { label: "Products", href: "#collection" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Services", href: "/services" },
+  { label: "Products", href: "/products" },
+  { label: "Testimonials", href: "/testimonials" },
+  { label: "FAQ", href: "/faqs" },
   { label: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -29,7 +33,7 @@ export default function Header() {
     <>
       {/* Top Bar - Reference Style */}
       <div className="bg-[#F6F8FA] border-b border-[#0B1C2D]/5 py-2.5 hidden md:block">
-        <div className="container max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center text-[11px] font-bold uppercase tracking-widest text-[#0B1C2D]/60 font-[var(--font-inter)]">
+        <div className="container max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center text-[11px] font-bold uppercase tracking-widest text-[#0B1C2D]/60 font-inter">
           <div className="flex items-center gap-8">
             <span className="flex items-center gap-2">
               <Phone className="size-3 text-[#0D9488]" />
@@ -53,7 +57,7 @@ export default function Header() {
         className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
           scrolled || mobileOpen
             ? "top-0 bg-white border-b border-[#0B1C2D]/5 py-3 shadow-md"
-            : "top-0 md:top-[38px] bg-white/90 backdrop-blur-sm py-5"
+            : "top-0 md:top-[38px] bg-white/90 backdrop-blur-sm py-3"
         }`}
       >
         <div className="container max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
@@ -62,28 +66,37 @@ export default function Header() {
             <Image
               src="/Occuvera_logo_update.jpeg"
               alt="Occuvera logo"
-              width={200}
+              width={160}
               height={60}
-              className="h-10 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+              className="h-14 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
             />
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-[13px] font-bold uppercase tracking-wider transition-all duration-300 relative group font-[var(--font-montserrat)] text-[#0B1C2D]/70 hover:text-[#0B1C2D]"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={`text-[13px] font-bold uppercase tracking-wider transition-all duration-300 relative group font-montserrat ${
+                    isActive ? "text-[#0D9488]" : "text-[#0B1C2D]/70 hover:text-[#0B1C2D]"
+                  }`}
+                >
+                  {link.label}
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#0D9488] transition-all duration-300 ${
+                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  }`} />
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Action Button */}
           <div className="hidden lg:block">
             <Button
+              onClick={() => setBookingOpen(true)}
               className="bg-[#0B1C2D] text-white hover:bg-[#0D9488] rounded-md px-6 h-10 text-[11px] font-bold uppercase tracking-widest transition-all duration-300"
             >
               Book Appointment
@@ -107,19 +120,29 @@ export default function Header() {
             mobileOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="bg-white px-6 py-8 space-y-5 shadow-2xl">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block text-lg font-[var(--font-montserrat)] font-bold text-[#0B1C2D] border-b border-[#0B1C2D]/5 pb-3"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="bg-white px-6 py-8 space-y-2 shadow-2xl">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block text-lg font-montserrat font-bold py-3 transition-colors ${
+                    isActive ? "text-[#0D9488]" : "text-[#0B1C2D]"
+                  } border-b border-gray-50`}
+                >
+                  {link.label}
+                  {isActive && <div className="mt-1 w-8 h-1 bg-[#0D9488] rounded-full" />}
+                </Link>
+              );
+            })}
             <div className="pt-4">
               <Button
+                onClick={() => {
+                  setMobileOpen(false);
+                  setBookingOpen(true);
+                }}
                 className="w-full h-14 bg-[#0D9488] text-white text-sm font-bold uppercase tracking-widest hover:bg-[#0B1C2D] transition-all duration-500"
               >
                 Book Your Eye Test
@@ -128,6 +151,7 @@ export default function Header() {
           </div>
         </div>
       </header>
+      <BookingModal open={bookingOpen} onOpenChange={setBookingOpen} />
     </>
   );
 }
